@@ -56,8 +56,8 @@ if(!empty($_POST['person']))
 
 	<form method="post" action="<?=$_SERVER['REQUEST_URI'];?>">
 		<!--
-		Error: Undefined variable "person".
-		Fix: Check if the variable is NOT empty before using it. -->
+		Error: Expecting POST method for submitted data.
+		Fix: Change method GET to POST. -->
 		<p><label for="firstName">First name</label> <input type="text" name="person[first_name]" id="firstName"></p>
 		<p><label for="lastName">Last name</label> <input type="text" name="person[last_name]" id="lastName"></p>
 		<p><label for="email">Email</label> <input type="text" name="person[email]" id="email"></p>
