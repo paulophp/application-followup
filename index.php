@@ -2,7 +2,11 @@
 
 class Interview
 {
-	public $title = 'Interview test';
+	public static $title = 'Interview test';
+	/*
+	Error: Undeclared static property.
+	Fix: Declare property as static.
+	*/
 }
 
 $lipsum = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus incidunt, quasi aliquid, quod officia commodi magni eum? Provident, sed necessitatibus perferendis nisi illum quos, incidunt sit tempora quasi, pariatur natus.';
@@ -15,7 +19,14 @@ $people = array(
 	array('id'=>5, 'first_name'=>'Doug', 'last_name'=>'Simons', 'email'=>'doug.simons@hotmail.com')
 );
 
-$person = $_POST['person'];
+if(!empty($_POST['person']))
+{
+	$person = $_POST['person'];
+	/*
+	Error: Undefined index "person".
+	Fix: Check if the variable exists before using it.
+	*/
+}
 
 ?>
 
@@ -43,14 +54,22 @@ $person = $_POST['person'];
 	<hr>
 
 
-	<form method="get" action="<?=$_SERVER['REQUEST_URI'];?>">
+	<form method="post" action="<?=$_SERVER['REQUEST_URI'];?>">
+		<!--
+		Error: Undefined variable "person".
+		Fix: Check if the variable is NOT empty before using it. -->
 		<p><label for="firstName">First name</label> <input type="text" name="person[first_name]" id="firstName"></p>
 		<p><label for="lastName">Last name</label> <input type="text" name="person[last_name]" id="lastName"></p>
 		<p><label for="email">Email</label> <input type="text" name="person[email]" id="email"></p>
 		<p><input type="submit" value="Submit" /></p>
 	</form>
 
-	<?php if ($person): ?>
+	<?php
+	/*
+	Error: Undefined variable "person".
+	Fix: Check if the variable is NOT empty before using it.
+	*/
+	if (!empty($person)): ?>
 		<p><strong>Person</strong> <?=$person['first_name'];?>, <?=$person['last_name'];?>, <?=$person['email'];?></p>
 	<?php endif; ?>
 
@@ -67,11 +86,16 @@ $person = $_POST['person'];
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($people as $person): ?>
+			<?php
+			/*
+			Error: Trying to get property of non-object
+			Fix: Access the properties of the array properly.
+			*/
+			foreach ($people as $person): ?>
 				<tr>
-					<td><?=$person->first_name;?></td>
-					<td><?=$person->last_name;?></td>
-					<td><?=$person->email;?></td>
+					<td><?=$person['first_name'];?></td>
+					<td><?=$person['last_name'];?></td>
+					<td><?=$person['email'];?></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
